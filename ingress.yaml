@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden-ingress
+  namespace: vaultwarden
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    cert-manager.io/cluster-issuer: dns-clusterissuer
+spec:
+  rules:
+    - host: vwp.thejimnicholson.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port: 
+                  number: 80
+  tls:
+    - hosts:
+      - vwp.thejimnicholson.com
+      secretName: vaultwarden-thejimnicholson-com

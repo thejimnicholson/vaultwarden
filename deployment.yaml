@@ -25,18 +25,21 @@ spec:
         image: vaultwarden/server:1.26.0
         imagePullPolicy: Always             # < always use the latest image when creating container/pod
         env:                                # < the environment variables required (see container documentation)
-          - name: PGID
-            value: "1000"
-          - name: PUID
-            value: "1000"
+          - name: SIGNUPS_ALLOWED
+            value: "true"
           - name: TZ
-            value: "America/Los_Angeles"        
+            value: "America/Los_Angeles"
+          - name: ADMIN_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: vwp-secrets
+                key: ADMIN_TOKEN      
         ports:                              # < the ports required (see container documentation)
         - containerPort: 80
           name: http-80
           protocol: TCP
         volumeMounts:                       # < the volume mount in the container. Look at the relation volumelabel->pvc->pv
-        - mountPath: /config               # < mount location in the container
+        - mountPath: /data               # < mount location in the container
           name: vaultwarden-storage              # < volumelabel configured earlier in the yaml file
       volumes:
       - name: vaultwarden-storage
