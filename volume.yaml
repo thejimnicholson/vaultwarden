@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vaultwarden-pv
+  namespace: vaultwarden
+  labels:
+    app: vaultwarden
+spec:
+  storageClassName: "local-path"
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nolock
+  nfs:
+    server: 10.0.96.14
+    path: "/mnt/data/vaultwarden"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden-storage
+  namespace: vaultwarden
+  annotations:
+spec:
+  storageClassName: "local-path"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: vaultwarden-pv
