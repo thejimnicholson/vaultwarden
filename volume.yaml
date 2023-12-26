@@ -33,3 +33,16 @@ spec:
     requests:
       storage: 5Gi
   volumeName: vaultwarden-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden-storage-nfs
+  namespace: vaultwarden
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
