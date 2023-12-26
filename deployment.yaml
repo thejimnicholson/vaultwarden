@@ -40,13 +40,8 @@ spec:
           protocol: TCP
         volumeMounts:                       # < the volume mount in the container. Look at the relation volumelabel->pvc->pv
         - mountPath: /data               # < mount location in the container
-          name: vaultwarden-storage              # < volumelabel configured earlier in the yaml file
-        - mountPath: /data.new               # < mount location in the container
           name: vaultwarden-storage-nfs
       volumes:
-      - name: vaultwarden-storage
-        persistentVolumeClaim:
-          claimName: vaultwarden-storage
       - name: vaultwarden-storage-nfs
         persistentVolumeClaim:
           claimName: vaultwarden-storage-nfs
