@@ -5,10 +5,16 @@ metadata:
   name: vaultwarden-ingress
   namespace: vaultwarden
   annotations:
-    kubernetes.io/ingress.class: "traefik"
+#    kubernetes.io/ingress.class: "traefik"
     traefik.ingress.kubernetes.io/redirect-entry-point: https
     cert-manager.io/cluster-issuer: dns-clusterissuer
+    gethomepage.dev/description: Password manager
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Tools
+#    gethomepage.dev/icon: homepage.png
+    gethomepage.dev/name: Vaultwarden
 spec:
+  ingressClassName: traefik
   rules:
     - host: vwp.thejimnicholson.com
       http:
