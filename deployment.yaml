@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: vaultwarden
-        image: vaultwarden/server:1.33.0
+        image: vaultwarden/server:1.33.2
         imagePullPolicy: Always             # < always use the latest image when creating container/pod
         env:                                # < the environment variables required (see container documentation)
           - name: SIGNUPS_ALLOWED
