@@ -46,9 +46,9 @@ spec:
             cpu: "500m"
             memory: "512Mi"
         volumeMounts:                       # < the volume mount in the container. Look at the relation volumelabel->pvc->pv
-        - mountPath: /data               # < mount location in the container
-          name: vaultwarden-storage-nfs
+        - mountPath: /data
+          name: vaultwarden-storage-localpath
       volumes:
-      - name: vaultwarden-storage-nfs
+      - name: vaultwarden-storage-localpath
         persistentVolumeClaim:
-          claimName: vaultwarden-storage-nfs
+          claimName: vaultwarden-storage-localpath

@@ -11,3 +11,33 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vaultwarden-localpath-pv-100mi
+spec:
+  capacity:
+    storage: 100Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: localpath
+  hostPath:
+    path: /var/lib/rancher/k3s/storage/vaultwarden-localpath-100mi
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vaultwarden-storage-localpath
+  namespace: vaultwarden
+spec:
+  storageClassName: localpath
+  volumeName: vaultwarden-localpath-pv-100mi
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
